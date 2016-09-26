@@ -1,0 +1,8 @@
+.LayoutSelect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.LayoutSelect__buttonGroup {
+  margin: 0 1em;
+}

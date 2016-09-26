@@ -1,0 +1,13 @@
+.MovieCard {
+  max-width: 300px;
+}
+
+.MovieCard__Actions {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.MovieCard .FavoritesSelect {
+  margin: 0.5em 0 0;
+}
