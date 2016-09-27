@@ -1,0 +1,18 @@
+.MovieListItem {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: start;
+  align-items: center;
+  max-width: 40em;
+  margin: 0.2em 0;
+}
+
+.MovieListItem img {
+  object-fit: cover;
+  width: 100px;
+  height: auto;
+}
+
+.MovieListItem img + div {
+  width: 100%;
+}
