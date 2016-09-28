@@ -13,18 +13,22 @@ export default class MovieCard extends Component {
     this.subtitle = `Added: ${this.movie.added} Views: ${this.movie.views} Likes: ${this.movie.likes}`
   }
 
+  playMovie = () => this.props.playMovie(this.movie);
+
+  deleteMovie = () => this.props.deleteMovie(this.movie);
+
   render() {
     return (
       <div className="MovieCard">
         <Card>
           <CardMedia>
-            <img src={this.movie.thumbnail}/>
+            <img src={this.movie.thumbnail} onClick={this.playMovie}/>
           </CardMedia>
           <CardTitle title={this.movie.title} subtitle={this.subtitle} />
           <CardActions className="MovieCard__Actions">
-            <FavoritesSelect />
-            <FlatButton label="Play" />
-            <FlatButton label="Delete" />
+            <FavoritesSelect toggleFavorite={this.props.toggleFavorite} favoriteMovie={this.movie} />
+            <FlatButton label="Play" onClick={this.playMovie} />
+            <FlatButton label="Delete" onClick={this.deleteMovie} />
           </CardActions>
         </Card>
       </div>

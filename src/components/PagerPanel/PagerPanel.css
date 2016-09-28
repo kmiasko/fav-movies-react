@@ -1,0 +1,14 @@
+.PagerPanel {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.PagerPanel ul {
+  list-style: none;
+}
+
+.PagerPanel li {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0.5em;
+}

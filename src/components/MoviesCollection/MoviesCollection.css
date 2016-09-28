@@ -1,4 +1,5 @@
 .MoviesCollection {
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row wrap;
+  justify-content: center;
 }

@@ -8,10 +8,20 @@ export default class FavoritesSelect extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-    this.state = { favoritesOnly: false };
+    if (!this.props.favoriteMovie) {
+      this.state = { favorite: false };
+    } else {
+      this.state = { favorite: this.props.favoriteMovie.favorite };
+    }
   }
 
-  handleChange = (event, value) =>  this.setState({favoritesOnly: value});
+  handleChange = (event, value) =>  {
+    if (!this.props.favoriteMovie) {
+      this.setState({favorite: !this.state.favorite}, () => this.props.setFavorites(this.state.favorite));
+    } else {
+      this.setState({favorite: !this.state.favorite}, () => this.props.toggleFavorite(this.props.favoriteMovie, !this.props.favoriteMovie.favorite));
+    }
+  }
 
   render() {
     return (
@@ -19,7 +29,7 @@ export default class FavoritesSelect extends Component {
         <Checkbox
           checkedIcon={<ActionFavorite />}
           uncheckedIcon={<ActionFavoriteBorder />}
-          checked={this.state.favoritesOnly}
+          checked={this.state.favorite}
           onCheck={this.handleChange}
         />
       </div>

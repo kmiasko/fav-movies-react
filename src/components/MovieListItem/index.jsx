@@ -15,13 +15,17 @@ export default class MovieListItem extends Component {
     this.subtitle = `Added: ${this.movie.added} Views: ${this.movie.views} Likes: ${this.movie.likes}`
   }
 
+  playMovie = () => this.props.playMovie(this.movie);
+
+  deleteMovie = () => this.props.deleteMovie(this.movie);
+
   render() {
     return (
       <div className="MovieListItem">
-        <img src={this.movie.thumbnail} alt="Thumbnail" />
-        <ListItem primaryText={this.movie.title} secondaryText={this.subtitle} />
-        <FavoritesSelect />
-        <IconButton>
+        <img src={this.movie.thumbnail} alt="Thumbnail" onClick={this.playMovie} />
+        <ListItem primaryText={this.movie.title} secondaryText={this.subtitle} onClick={this.playMovie} />
+        <FavoritesSelect toggleFavorite={this.props.toggleFavorite} favoriteMovie={this.movie} />
+        <IconButton onClick={this.deleteMovie}>
           <NavigationClose />
         </IconButton>
       </div>

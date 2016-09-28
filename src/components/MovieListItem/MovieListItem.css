@@ -3,14 +3,16 @@
   flex-flow: row nowrap;
   justify-content: start;
   align-items: center;
+  margin: 0.2em auto;
   max-width: 40em;
-  margin: 0.2em 0;
+  flex: 1 1 100%;
 }
 
 .MovieListItem img {
   object-fit: cover;
   width: 100px;
   height: auto;
+  cursor: pointer;
 }
 
 .MovieListItem img + div {

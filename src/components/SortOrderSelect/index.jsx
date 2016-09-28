@@ -3,18 +3,21 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 const sortOrders = [
-  <MenuItem key={1} value="Desc" primaryText="Desc" />,
-  <MenuItem key={2} value="Asc" primaryText="Asc" />,
+  <MenuItem key={1} value="desc" primaryText="Desc" />,
+  <MenuItem key={2} value="asc" primaryText="Asc" />,
 ];
 
 export default class SortOrderSelect extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { sortOrder: "Desc" };
+    this.props = props;
+    this.state = { sortOrder: "desc" };
   }
 
-  handleChange = (event, index, value) => this.setState({sortOrder: value});
+  handleChange = (event, index, value) => {
+    this.setState({sortOrder: value}, () => this.props.setOrder(value));
+  }
 
   render() {
     return (

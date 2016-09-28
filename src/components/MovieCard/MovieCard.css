@@ -12,3 +12,7 @@
 .MovieCard .FavoritesSelect {
   margin: 0.5em 0 0;
 }
+
+.MovieCard img {
+  cursor: pointer;
+}

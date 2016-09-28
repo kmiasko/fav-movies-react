@@ -14,10 +14,13 @@ export default class ItemsCountSelect extends Component {
 
   constructor(props) {
     super(props);
+    this.props = props;
     this.state = { itemCount: 10 };
   }
 
-  handleChange = (event, index, value) => this.setState({itemCount: value});
+  handleChange = (event, index, value) => {
+    this.setState({itemCount: value}, () => this.props.setItemsCount(value));
+  }
 
   render() {
     return (
