@@ -12,7 +12,12 @@ export default class MovieListItem extends Component {
     super(props);
     this.props = props;
     this.movie = this.props.movie;
-    this.subtitle = `Added: ${this.movie.added} Views: ${this.movie.views} Likes: ${this.movie.likes}`
+    this.subtitle = `Added: ${this.createDate(this.movie.added)} Views: ${this.movie.views} Likes: ${this.movie.likes}`;
+  }
+
+  createDate = (date) => {
+    let tmp_date = new Date(date);
+    return `${tmp_date.getDate()}-${tmp_date.getMonth()}-${tmp_date.getFullYear()}`;
   }
 
   playMovie = () => this.props.playMovie(this.movie);
