@@ -3,3 +3,24 @@
   flex-flow: row wrap;
   justify-content: center;
 }
+
+.MoviesCollection .pagination {
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 1 0 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.MoviesCollection .pagination .active {
+  background: rgba(0,0,0,0.2);
+}
+
+.MoviesCollection ul {
+  list-style: none;
+}
+
+.MoviesCollection li {
+  padding: 0.5em;
+  cursor: pointer;
+}

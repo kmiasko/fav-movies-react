@@ -67,13 +67,13 @@ export default class App extends Component {
     }
   }
 
-  setLayout = layout => this.setState({ layout: layout }, () => this.createPassMovies());
+  setLayout = layout => this.setState({ layout: layout });
 
   setOrder = order => this.setState({ order: order }, () => this.createPassMovies());
 
   setFavorites = value => this.setState({ favorites: value }, () => this.createPassMovies());
 
-  setItemsCount = count => this.setState({ itemsCount: count }, () => this.createPassMovies());
+  setItemsCount = count => this.setState({ itemsCount: count });
 
   toggleFavorite = (movie, value) => {
     const idx = _.findIndex(this.state.movies, {'id': movie.id});
@@ -109,15 +109,12 @@ export default class App extends Component {
   }
 
   playMovie = movie => {
-    console.log(movie.embed);
     ReactDOM.render((
       <MovieDialog movie={movie} dialogOpen={true} />
     ), document.querySelector('#dialog'));
   }
 
-  componentDidMount() {
-    this.setState({movies: this.LS.load('movies')}, () => this.setOrder(this.state.order));
-  }
+  componentDidMount = () => this.setState({movies: this.LS.load('movies')}, () => this.createPassMovies());
 
   render() {
     return (
