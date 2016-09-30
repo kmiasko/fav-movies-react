@@ -36,3 +36,7 @@ export default class ItemsCountSelect extends Component {
     );
   }
 }
+
+ItemsCountSelect.propTypes = {
+  setItemsCount: PropTypes.func
+};

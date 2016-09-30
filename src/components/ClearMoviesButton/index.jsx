@@ -1,24 +1,20 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import LocalStorage from '../../core/LocalStorage';
 
-export default class ClearMoviesButton extends Component {
+export default function ClearMoviesButton(props) {
 
-  constructor(props) {
-    super(props);
-    this.props = props;
-    this.LS = new LocalStorage();
-    this.clearMovies = this.clearMovies.bind(this);
+  const clearMovies = () => {
+    const LS = new LocalStorage();
+    props.clearMovies();
+    LS.save('movies', []);
   }
 
-  clearMovies() {
-    this.props.clearMovies();
-    this.LS.save('movies', []);
-  }
-
-  render() {
-    return (
-      <RaisedButton label="Clear Movies" secondary={true} onClick={this.clearMovies}/>
-    );
-  }
+  return (
+    <RaisedButton label="Clear Movies" secondary={true} onClick={clearMovies}/>
+  );
 }
+
+ClearMoviesButton.propTypes = {
+  clearMovies: PropTypes.func
+};

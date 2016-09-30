@@ -19,7 +19,6 @@ export default class MoviesCollection extends Component {
       data: []
     };
     this.props = props;
-    this.moviesToShow = [];
   }
 
   filterMovies = (props) => {
@@ -92,3 +91,11 @@ export default class MoviesCollection extends Component {
     );
   }
 }
+
+MoviesCollection.propTypes = {
+  movies: PropTypes.array,
+  favorites: PropTypes.bool,
+  order: PropTypes.string,
+  itemsCount: PropTypes.number,
+  layout: PropTypes.string,
+};

@@ -36,3 +36,7 @@ export default class FavoritesSelect extends Component {
     );
   }
 }
+
+FavoritesSelect.propTypes = {
+  favoriteMovie: PropTypes.object
+};

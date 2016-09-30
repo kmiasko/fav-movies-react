@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
-export default class MovieAddInput extends React.Component {
+export default class MovieAddInput extends Component {
   constructor(props) {
     super(props);
     this.props = props;
@@ -28,3 +28,7 @@ export default class MovieAddInput extends React.Component {
     );
   }
 }
+
+MovieAddInput.propTypes = {
+  addMovieQuery: PropTypes.func
+};

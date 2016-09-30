@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import {Card, CardActions, CardMedia, CardTitle} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FavoritesSelect from '../FavoritesSelect';
@@ -26,7 +26,7 @@ export default class MovieCard extends Component {
       <div className="MovieCard">
         <Card>
           <CardMedia>
-            <img src={this.props.movie.thumbnail} onClick={this.playMovie}/>
+            <img src={this.props.movie.thumbnail} onClick={this.playMovie} alt="Movie thumbnail"/>
           </CardMedia>
           <CardTitle title={this.props.movie.title} subtitle={this.subtitle} />
           <CardActions className="MovieCard__Actions">
@@ -38,4 +38,11 @@ export default class MovieCard extends Component {
       </div>
     );
   }
+}
+
+MovieCard.propTypes = {
+  movie: PropTypes.object,
+  playMovie: PropTypes.func,
+  deleteMovie: PropTypes.func,
+  toggleFavorite: PropTypes.func
 }

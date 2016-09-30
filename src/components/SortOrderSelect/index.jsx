@@ -33,3 +33,7 @@ export default class SortOrderSelect extends Component {
     );
   }
 }
+
+SortOrderSelect.propTypes = {
+  sortOrder: PropTypes.func
+};

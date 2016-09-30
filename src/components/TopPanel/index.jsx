@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import MovieAddInput from '../MovieAddInput';
 import LoadMoviesButton from '../LoadMoviesButton';
 import ClearMoviesButton from '../ClearMoviesButton';
@@ -15,3 +15,9 @@ export default function TopPanel(props) {
     </div>
   );
 }
+
+TopPanel.propTypes = {
+  addMovieQuery: PropTypes.func,
+  setMovies: PropTypes.func,
+  clearMovies: PropTypes.func
+};

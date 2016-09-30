@@ -36,3 +36,10 @@ export default class MovieListItem extends Component {
     );
   }
 }
+
+MovieListItem.propTypes = {
+  movie: PropTypes.object,
+  playMovie: PropTypes.func,
+  deleteMovie: PropTypes.func,
+  toggleFavorite: PropTypes.func
+}

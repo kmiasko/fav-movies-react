@@ -46,3 +46,7 @@ export default class MovieDialog extends Component {
 MovieDialog.childContextTypes = {
   muiTheme: React.PropTypes.object.isRequired,
 };
+
+MovieDialog.propTypes = {
+  movie: PropTypes.object
+};
