@@ -26,7 +26,7 @@ export default class MovieListItem extends Component {
   render() {
     return (
       <div className="MovieListItem">
-        <img src={this.props.movie.thumbnail} alt="Thumbnail" onClick={this.props.playMovie} />
+        <img src={this.props.movie.thumbnail} alt="Thumbnail" onClick={this.playMovie} />
         <ListItem primaryText={this.props.movie.title} secondaryText={this.subtitle} onClick={this.playMovie} />
         <FavoritesSelect toggleFavorite={this.props.toggleFavorite} favoriteMovie={this.props.movie} />
         <IconButton onClick={this.deleteMovie}>

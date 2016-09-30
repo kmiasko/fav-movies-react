@@ -14,47 +14,54 @@ export default class MoviesCollection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
-      movies: [],
       selected: 0,
-      pageSize: 10,
-      pageNum: 0
+      pageNum: 0,
+      data: []
     };
     this.props = props;
+    this.moviesToShow = [];
   }
 
-  componentWillReceiveProps(newProps) {
-    let data = _.chunk(newProps.movies, newProps.pageSize) || [];
-    let selected = 0;
-    let pageNum = Math.ceil(newProps.movies.length / newProps.pageSize);
-    (this.state.selected > pageNum - 1) ? selected = 0 : selected = this.state.selected;
-    this.setState({data: data[selected] || [], pageNum: pageNum, movies: newProps.movies, pageSize: newProps.pageSize, selected: selected });
+  filterMovies = (props) => {
+    let movies = [];
+    if (props.favorites === true) {
+      movies = _.filter(props.movies, ['favorite', true]);
+    } else {
+      movies = props.movies;
+    }
+    if (props.order === 'asc') {
+      movies = _.sortBy(movies, ['added']);
+    } else {
+      movies = _.chain(movies).sortBy('added').reverse().value();
+    }
+    return movies;
   }
 
-  loadComments() {
-    let data = _.chunk(this.state.movies, this.state.pageSize);
-    let selected = 0;
-    let pageNum = Math.ceil(this.state.movies.length / this.state.pageSize);
-    (this.state.selected > this.state.pageNum - 1) ? selected = 0 : selected = this.state.selected;
-    this.setState({data: data[selected] || [], pageNum: pageNum});
+  loadMovies = (source = this.props) => {
+    const movies = this.filterMovies(source);
+    const pageNum = Math.ceil(movies.length / source.itemsCount );
+    const paginatedMovies = _.chunk(movies, source.itemsCount);
+    const selected = (this.state.selected >= pageNum) ? 0 : this.state.selected;
+    this.setState({ data: paginatedMovies[selected], pageNum: pageNum, selected: selected });
   }
 
-  componentDidMount() {
-    this.loadComments();
+  componentWillReceiveProps = newProps => {
+    this.loadMovies(newProps);
+  }
+
+  componentWillMount = () => {
+    this.loadMovies();
   }
 
   handlePageClick = (data) => {
-    let selected = data.selected;
-    let offset = Math.ceil(selected * this.props.pageSize);
-
-    this.setState({selected: selected}, () => {
-      this.loadComments();
-    });
-  };
+    this.setState({ selected: data.selected }, () => this.loadMovies());
+  }
 
   render() {
-    const self = this;
     let mclass = 'MovieGrid';
+    if (!this.state.data || this.state.data.length === 0) {
+      return false;
+    }
     const movieList = this.state.data.map(m => {
       if (this.props.layout === 'list') {
         mclass = 'MovieList';
@@ -67,7 +74,7 @@ export default class MoviesCollection extends Component {
     return (
       <div className="MoviesCollection">
         <div className={mclass}>
-        { movieList }
+          { movieList }
         </div>
         <ReactPaginate previousLabel={"previous"}
           nextLabel={"next"}
@@ -79,6 +86,7 @@ export default class MoviesCollection extends Component {
           clickCallback={this.handlePageClick}
           containerClassName={"pagination"}
           subContainerClassName={"pages pagination"}
+          forceSelected={this.state.selected}
           activeClassName={"active"} />
       </div>
     );

@@ -33,7 +33,6 @@ export default class App extends Component {
       favorites: false,
       order: 'desc',
       layout: 'grid',
-      passMovies: []
     };
 
     this.VD = new VideoDownloader();
@@ -42,18 +41,16 @@ export default class App extends Component {
     this.LS = new LocalStorage();
   }
 
-  setMovies = movies => this.setState({movies: movies}, () => this.createPassMovies());
+  setMovies = movies => this.setState({movies: movies});
+  clearMovies = () => this.setState({movies: []});
 
-  clearMovies = () => this.setState({movies: []}, () => this.createPassMovies());
-
-  addMovie(query, provider) {
+  addMovie = (query, provider) => {
     const self = this;
     this.VD.setProviderFunc(provider);
     this.VD.download(query)
       .then(function(d) {
         if (d === undefined) return;
         self.setState({movies: [].concat(self.state.movies, d)}, () =>  {
-          self.createPassMovies();
           self.LS.save('movies', self.state.movies);
         });
       });
@@ -68,44 +65,20 @@ export default class App extends Component {
   }
 
   setLayout = layout => this.setState({ layout: layout });
-
-  setOrder = order => this.setState({ order: order }, () => this.createPassMovies());
-
-  setFavorites = value => this.setState({ favorites: value }, () => this.createPassMovies());
-
+  setOrder = order => this.setState({ order: order });
+  setFavorites = value => this.setState({ favorites: value });
   setItemsCount = count => this.setState({ itemsCount: count });
 
   toggleFavorite = (movie, value) => {
     const idx = _.findIndex(this.state.movies, {'id': movie.id});
     const state = _.extend({}, this.state);
     state.movies[idx].favorite = value;
-    this.setState(state, () => {
-      this.LS.save('movies', this.state.movies);
-      this.createPassMovies();
-    });
+    this.setState(state, () => this.LS.save('movies', this.state.movies));
   }
 
   deleteMovie = movie => {
     const movies = _.reject(this.state.movies, { 'id': movie.id });
-    this.setState({movies: movies}, () => {
-      this.LS.save('movies', this.state.movies);
-      this.createPassMovies();
-    });
-  }
-
-  createPassMovies = () => {
-    let movies = [];
-    if (this.state.favorites === true) {
-      movies = _.filter(this.state.movies, ['favorite', true]);
-    } else {
-      movies = this.state.movies;
-    }
-    if (this.state.order === 'asc') {
-      movies = _.sortBy(movies, ['added']);
-    } else {
-      movies = _.chain(movies).sortBy('added').reverse().value();
-    }
-    this.setState({passMovies: movies});
+    this.setState({movies: movies}, () => this.LS.save('movies', this.state.movies));
   }
 
   playMovie = movie => {
@@ -114,7 +87,7 @@ export default class App extends Component {
     ), document.querySelector('#dialog'));
   }
 
-  componentDidMount = () => this.setState({movies: this.LS.load('movies')}, () => this.createPassMovies());
+  componentWillMount = () => this.setState({movies: this.LS.load('movies')});
 
   render() {
     return (
@@ -123,7 +96,7 @@ export default class App extends Component {
           <div id="dialog"></div>
           <TopPanel setMovies={this.setMovies} clearMovies={this.clearMovies} addMovieQuery={this.addMovieQuery}/>
           <ControlPanel setLayout={this.setLayout} setOrder={this.setOrder} setItemsCount={this.setItemsCount} setFavorites={this.setFavorites} />
-          <MoviesCollection layout={this.state.layout} movies={this.state.passMovies} toggleFavorite={this.toggleFavorite} playMovie={this.playMovie} deleteMovie={this.deleteMovie} pageSize={this.state.itemsCount} />
+          <MoviesCollection {...this.state} toggleFavorite={this.toggleFavorite} playMovie={this.playMovie} deleteMovie={this.deleteMovie} />
         </div>
       </MuiThemeProvider>
     );
