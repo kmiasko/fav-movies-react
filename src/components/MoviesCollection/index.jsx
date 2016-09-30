@@ -7,6 +7,8 @@ import MovieListItem from '../MovieListItem';
 import PagerPanel from '../PagerPanel';
 
 import './MoviesCollection.css';
+import './MovieGrid.css';
+import './MovieList.css';
 
 export default class MoviesCollection extends Component {
 
@@ -53,17 +55,21 @@ export default class MoviesCollection extends Component {
 
   render() {
     const self = this;
+    let mclass = 'MovieGrid';
     const movieList = this.state.data.map(m => {
       if (this.props.layout === 'list') {
-        return <MovieListItem movie={m} key={m.id} playMovie={this.props.playMovie} deleteMovie={this.props.deleteMovie} toggleFavorite={this.props.toggleFavorite} favoriteMovie={m} />
+        mclass = 'MovieList';
+        return <MovieListItem movie={m} key={m.id} {...this.props} />
       } else {
-        return <MovieCard movie={m} key={m.id} playMovie={this.props.playMovie} deleteMovie={this.props.deleteMovie} toggleFavorite={this.props.toggleFavorite} favoriteMovie={m} />
+        return <MovieCard movie={m} key={m.id} {...this.props} />
       }
     });
 
     return (
       <div className="MoviesCollection">
+        <div className={mclass}>
         { movieList }
+        </div>
         <ReactPaginate previousLabel={"previous"}
           nextLabel={"next"}
           breakLabel={<a href="">...</a>}

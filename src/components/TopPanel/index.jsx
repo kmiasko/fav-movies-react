@@ -6,20 +6,12 @@ import ClearMoviesButton from '../ClearMoviesButton';
 import './TopPanel.css';
 
 
-export default class ClassComponent extends Component {
-
-  constructor(props) {
-    super(props);
-    this.props = props;
-  }
-
-  render() {
-    return (
-      <div className="TopPanel">
-        <MovieAddInput addMovieQuery={this.props.addMovieQuery}/>
-        <LoadMoviesButton setMovies={this.props.setMovies} />
-        <ClearMoviesButton clearMovies={this.props.clearMovies} />
-      </div>
-    );
-  }
+export default function TopPanel(props) {
+  return (
+    <div className="TopPanel">
+      <MovieAddInput addMovieQuery={props.addMovieQuery}/>
+      <LoadMoviesButton setMovies={props.setMovies} />
+      <ClearMoviesButton clearMovies={props.clearMovies} />
+    </div>
+  );
 }

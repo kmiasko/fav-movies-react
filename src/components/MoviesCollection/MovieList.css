@@ -1,0 +1,7 @@
+.MovieList {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: start;
+  align-items: start;
+  align-content: start;
+}

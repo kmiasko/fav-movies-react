@@ -1,11 +1,11 @@
 .MovieListItem {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  margin: 0.2em auto;
+  margin: 0.1em 0;
   max-width: 40em;
-  flex: 1 0 100%;
+  flex: 1 1 100%;
 }
 
 .MovieListItem img {
