@@ -1,43 +1,34 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import {Card, CardActions, CardMedia, CardTitle} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FavoritesSelect from '../FavoritesSelect';
 import './MovieCard.css';
 
-export default class MovieCard extends Component {
-
-  constructor(props) {
-    super(props);
-    this.props = props;
-    this.subtitle = `Added: ${this.createDate(this.props.movie.added)} Views: ${this.props.movie.views} Likes: ${this.props.movie.likes}`
-  }
-
-  createDate = (date) => {
+export default function MovieCard(props) {
+  const createDate = (date) => {
     let tmp_date = new Date(date);
     return `${tmp_date.getDate()}-${tmp_date.getMonth()}-${tmp_date.getFullYear()}`;
   }
 
-  playMovie = () => this.props.playMovie(this.props.movie);
+  const subtitle = `Added: ${createDate(props.movie.added)} Views: ${props.movie.views} Likes: ${props.movie.likes}`
+  const playMovie = () => props.playMovie(props.movie);
+  const deleteMovie = () => props.deleteMovie(props.movie);
 
-  deleteMovie = () => this.props.deleteMovie(this.props.movie);
-
-  render() {
-    return (
-      <div className="MovieCard">
-        <Card>
-          <CardMedia>
-            <img src={this.props.movie.thumbnail} onClick={this.playMovie} alt="Movie thumbnail"/>
-          </CardMedia>
-          <CardTitle title={this.props.movie.title} subtitle={this.subtitle} />
-          <CardActions className="MovieCard__Actions">
-            <FavoritesSelect toggleFavorite={this.props.toggleFavorite} favoriteMovie={this.props.movie} />
-            <FlatButton label="Play" onClick={this.playMovie} />
-            <FlatButton label="Delete" onClick={this.deleteMovie} />
-          </CardActions>
-        </Card>
-      </div>
-    );
-  }
+  return (
+    <div className="MovieCard">
+      <Card>
+        <CardMedia>
+          <img src={props.movie.thumbnail} onClick={playMovie} alt="Movie thumbnail"/>
+        </CardMedia>
+        <CardTitle title={props.movie.title} subtitle={subtitle} />
+        <CardActions className="MovieCard__Actions">
+          <FavoritesSelect toggleFavorite={props.toggleFavorite} favoriteMovie={props.movie} />
+          <FlatButton label="Play" onClick={playMovie} />
+          <FlatButton label="Delete" onClick={deleteMovie} />
+        </CardActions>
+      </Card>
+    </div>
+  );
 }
 
 MovieCard.propTypes = {
