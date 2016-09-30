@@ -9,8 +9,7 @@ export default class MovieCard extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-    this.movie = this.props.movie;
-    this.subtitle = `Added: ${this.createDate(this.movie.added)} Views: ${this.movie.views} Likes: ${this.movie.likes}`
+    this.subtitle = `Added: ${this.createDate(this.props.movie.added)} Views: ${this.props.movie.views} Likes: ${this.props.movie.likes}`
   }
 
   createDate = (date) => {
@@ -18,20 +17,20 @@ export default class MovieCard extends Component {
     return `${tmp_date.getDate()}-${tmp_date.getMonth()}-${tmp_date.getFullYear()}`;
   }
 
-  playMovie = () => this.props.playMovie(this.movie);
+  playMovie = () => this.props.playMovie(this.props.movie);
 
-  deleteMovie = () => this.props.deleteMovie(this.movie);
+  deleteMovie = () => this.props.deleteMovie(this.props.movie);
 
   render() {
     return (
       <div className="MovieCard">
         <Card>
           <CardMedia>
-            <img src={this.movie.thumbnail} onClick={this.playMovie}/>
+            <img src={this.props.movie.thumbnail} onClick={this.playMovie}/>
           </CardMedia>
-          <CardTitle title={this.movie.title} subtitle={this.subtitle} />
+          <CardTitle title={this.props.movie.title} subtitle={this.subtitle} />
           <CardActions className="MovieCard__Actions">
-            <FavoritesSelect toggleFavorite={this.props.toggleFavorite} favoriteMovie={this.movie} />
+            <FavoritesSelect toggleFavorite={this.props.toggleFavorite} favoriteMovie={this.props.movie} />
             <FlatButton label="Play" onClick={this.playMovie} />
             <FlatButton label="Delete" onClick={this.deleteMovie} />
           </CardActions>

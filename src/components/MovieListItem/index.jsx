@@ -11,8 +11,7 @@ export default class MovieListItem extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-    this.movie = this.props.movie;
-    this.subtitle = `Added: ${this.createDate(this.movie.added)} Views: ${this.movie.views} Likes: ${this.movie.likes}`;
+    this.subtitle = `Added: ${this.createDate(this.props.movie.added)} Views: ${this.props.movie.views} Likes: ${this.props.movie.likes}`;
   }
 
   createDate = (date) => {
@@ -20,16 +19,16 @@ export default class MovieListItem extends Component {
     return `${tmp_date.getDate()}-${tmp_date.getMonth()}-${tmp_date.getFullYear()}`;
   }
 
-  playMovie = () => this.props.playMovie(this.movie);
+  playMovie = () => this.props.playMovie(this.props.movie);
 
-  deleteMovie = () => this.props.deleteMovie(this.movie);
+  deleteMovie = () => this.props.deleteMovie(this.props.movie);
 
   render() {
     return (
       <div className="MovieListItem">
-        <img src={this.movie.thumbnail} alt="Thumbnail" onClick={this.playMovie} />
-        <ListItem primaryText={this.movie.title} secondaryText={this.subtitle} onClick={this.playMovie} />
-        <FavoritesSelect toggleFavorite={this.props.toggleFavorite} favoriteMovie={this.movie} />
+        <img src={this.props.movie.thumbnail} alt="Thumbnail" onClick={this.props.playMovie} />
+        <ListItem primaryText={this.props.movie.title} secondaryText={this.subtitle} onClick={this.playMovie} />
+        <FavoritesSelect toggleFavorite={this.props.toggleFavorite} favoriteMovie={this.props.movie} />
         <IconButton onClick={this.deleteMovie}>
           <NavigationClose />
         </IconButton>

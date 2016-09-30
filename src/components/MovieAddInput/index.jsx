@@ -7,17 +7,15 @@ export default class MovieAddInput extends React.Component {
     super(props);
     this.props = props;
     this.state = {query: ''};
-    this.addMovie = this.addMovie.bind(this);
-    this.setQuery = this.setQuery.bind(this);
   }
 
-  addMovie() {
+  addMovie = () => {
     if (this.state.query) {
       this.props.addMovieQuery(this.state.query);
     }
   }
 
-  setQuery(event) {
+  setQuery = event => {
     this.setState({ query: event.target.value });
   }
 

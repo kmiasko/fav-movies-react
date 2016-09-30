@@ -4,7 +4,6 @@ import _ from 'lodash';
 
 import MovieCard from '../MovieCard';
 import MovieListItem from '../MovieListItem';
-import PagerPanel from '../PagerPanel';
 
 import './MoviesCollection.css';
 import './MovieGrid.css';
