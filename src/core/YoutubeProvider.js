@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 
 export default class YoutubeProvider {
   constructor() {
-    this.apiKey = 'AIzaSyAvIS_HibK1wNp2H3PV0K2QX-uaMRSs2uo';
+    this.apiKey = '';
   }
 
   parseUrl(video) {
