@@ -3,8 +3,8 @@ import 'whatwg-fetch';
 export default class VimeoProviderService {
   constructor() {
     this.authorizationUrl = 'https://api.vimeo.com/oauth/authorize/client';
-    this.clientID = '6093cd3654c92b2b08977f1ff7291c1e920a7246';
-    this.clientSecret = 'mxBlLn5lSE9MVFBfFLXemUIKtX3lcoHiR9qtuw1ZdhtyUyTpwA2r7rXmC0rkW836Yx8IGnYjKif/88RPiSFpkuUQ4VZGVvJlXJ8NFAg/24FKhNcrFooaWVgXD1yzUIYS';
+    this.clientID = '';
+    this.clientSecret = '';
 
   }
 
